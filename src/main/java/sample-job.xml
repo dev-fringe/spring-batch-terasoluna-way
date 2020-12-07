@@ -15,15 +15,13 @@
 
 	<job id="job">
 		<step id="masterStep">
-			<partition step="secondStep"
-				partitioner="samplePartitioner">
+			<partition step="secondStep" partitioner="samplePartitioner">
 				<handler grid-size="50" task-executor="simpleTaskExecutor" />
 			</partition>
 		</step>
 	</job>
 
 	<step id="secondStep">
-		<tasklet transaction-manager="transactionManager"
-			ref="sampleTasklet" />
+		<tasklet transaction-manager="transactionManager" ref="sampleTasklet" />
 	</step>
 </beans:beans> 

@@ -20,35 +20,35 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 public class SampleTasklet implements Tasklet {
 
 	private static final Logger log = LogManager.getLogger(SampleTasklet.class.getName());
-    @Autowired ItemStreamReader<Object> sampleReader;
-    @Autowired PlatformTransactionManager jobTransactionManager;
-    @Value("#{stepExecutionContext[name]}") private String threadName;
+	@Autowired ItemStreamReader<Object> sampleReader;
+	@Autowired PlatformTransactionManager jobTransactionManager;
+	@Value("#{stepExecutionContext[name]}") private String threadName;
 
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-        DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
-        TransactionStatus status = null;
-        sampleReader.open(chunkContext.getStepContext().getStepExecution().getExecutionContext());
-        Object item = null;
-        int count = 0;
-        try {
-            while ((item = sampleReader.read()) != null) {
-            	log.info("item = " + item + ", count = " + count);
-                if (count == 0) {
-                    status = jobTransactionManager.getTransaction(definition); // (3)
-                }
-                count++;
-            }
-            jobTransactionManager.commit(status);  // (4)
-        } catch (Exception e) {
-            jobTransactionManager.rollback(status);        	
-            throw e;
-        } finally {
-            if (status != null && !status.isCompleted()) {
-                jobTransactionManager.commit(status);   // (6)
-            }
-            sampleReader.close();
-        }
-        log.info(threadName +  " is sample done");
+		DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
+		TransactionStatus status = null;
+		sampleReader.open(chunkContext.getStepContext().getStepExecution().getExecutionContext());
+		Object item = null;
+		int count = 0;
+		try {
+			while ((item = sampleReader.read()) != null) {
+				log.info("item = " + item + ", count = " + count);
+				if (count == 0) {
+					status = jobTransactionManager.getTransaction(definition); // (3)
+				}
+				count++;
+			}
+			jobTransactionManager.commit(status); // (4)
+		} catch (Exception e) {
+			jobTransactionManager.rollback(status);
+			throw e;
+		} finally {
+			if (status != null && !status.isCompleted()) {
+				jobTransactionManager.commit(status); // (6)
+			}
+			sampleReader.close();
+		}
+		log.info(threadName + " is sample done");
 		return RepeatStatus.FINISHED;
 	}
 }
