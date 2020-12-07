@@ -1,2 +1,5 @@
 a simple multi thread job using partitioner and reader and tasklet
-image::job.jpg[]
+``` program
+java org.springframework.batch.core.launch.support.CommandLineJobRunner sample-job.xml job
+```
+image::job.jpg[job]
