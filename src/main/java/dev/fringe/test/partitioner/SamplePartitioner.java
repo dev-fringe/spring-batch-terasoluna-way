@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SamplePartitioner implements Partitioner {
     
-    private static final Logger log = LogManager.getLogger(SamplePartitioner.class.getName());
-    
+	private static final Logger log = LogManager.getLogger(SamplePartitioner.class.getName());
+
     public Map<String, ExecutionContext> partition(int gridSize) {
         List<Map<String, Object>> projects = new ArrayList<>();
         try {

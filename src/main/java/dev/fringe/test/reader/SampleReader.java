@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class SampleReader implements ItemStreamReader<Object> {
     
 	private static final Logger log = LogManager.getLogger(SampleReader.class.getName());
-	
+
     protected volatile List<Object> objects;
     @Value("#{stepExecutionContext[name]}") private String threadName;
     

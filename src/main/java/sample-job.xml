@@ -9,19 +9,21 @@
                     http://www.springframework.org/schema/batch/spring-batch.xsd
                     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="dev.fringe.test" />
-    
+	<context:component-scan base-package="dev.fringe.test" />
+
 	<beans:bean class="dev.fringe.test.config.SampleConfiguration" />
-	
+
 	<job id="job">
 		<step id="masterStep">
-			<partition step="secondStep" partitioner="samplePartitioner">
+			<partition step="secondStep"
+				partitioner="samplePartitioner">
 				<handler grid-size="50" task-executor="simpleTaskExecutor" />
 			</partition>
 		</step>
 	</job>
-	
+
 	<step id="secondStep">
-		<tasklet transaction-manager="transactionManager" ref="sampleTasklet" />
+		<tasklet transaction-manager="transactionManager"
+			ref="sampleTasklet" />
 	</step>
 </beans:beans> 
