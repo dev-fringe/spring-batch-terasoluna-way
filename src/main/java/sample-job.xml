@@ -11,7 +11,7 @@
 
     <context:component-scan base-package="dev.fringe.test" />
     
-	<beans:bean id="conf" class="dev.fringe.test.config.SampleConfiguration" />
+	<beans:bean class="dev.fringe.test.config.SampleConfiguration" />
 	
 	<job id="job">
 		<step id="masterStep">
