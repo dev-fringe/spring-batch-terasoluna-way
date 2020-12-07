@@ -1,0 +1,2 @@
+a simple multi thread job using partitioner and reader and tasklet
+image::job.jpg[]
