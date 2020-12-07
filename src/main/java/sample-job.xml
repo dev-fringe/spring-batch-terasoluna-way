@@ -1,0 +1,22 @@
+<beans:beans
+	xmlns="http://www.springframework.org/schema/batch"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans.xsd 
+                    http://www.springframework.org/schema/batch 
+                    http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+	<job id="job">
+		<step id="masterStep">
+			<partition step="secondStep" partitioner="samplePartitioner">
+				<handler grid-size="50" task-executor="simpleTaskExecutor" />
+			</partition>
+		</step>
+	</job>
+	
+	<step id="secondStep">
+		<tasklet transaction-manager="transactionManager" ref="sampleTasklet" />
+	</step>
+	
+</beans:beans> 
