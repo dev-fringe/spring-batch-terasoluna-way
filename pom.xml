@@ -9,10 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.fringe</groupId>
-	<artifactId>test11</artifactId>
+	<artifactId>sample-batch</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>test</name>
-	<description>Test project for Spring Boot</description>
+	<name>sample-batch</name>
 
 	<properties>
 		<java.version>11</java.version>
